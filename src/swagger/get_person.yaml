@@ -1,0 +1,64 @@
+환자 정보 조회
+---
+tags:
+  - Person
+parameters:
+  - in: query
+    name: page
+    type: integer
+    description: >
+      0페이지 부터 시작 10개씩 표기
+  - in: query
+    name: person_id
+    type: integer
+    description: >
+      환자 번호
+  - in: query
+    name: gender_name
+    type: string
+    description: >
+      gender_name(성별) 검색
+  - in: query
+    name: race_name
+    type: string
+    description: >
+      race_name(인종) 검색
+  - in: query
+    name: ethnicity_name
+    type: string
+    description: >
+      ethnicity_name(민족) 검색
+responses:
+  200:
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          concept_id:
+            type: integer
+            default: concept 번호
+          gender_concept_id:
+            type: integer
+            default: 성별 concept 번호
+          race_concept_id:
+            type: integer
+            default: 인종 concept 번호
+          ethnicity_concept_id:
+            type: integer
+            default: 민족 concept 번호
+          gender_name:
+            type: string
+            default: 성별
+          birth_datetime:
+            type: string
+            default: 생년월일
+          race_name:
+            type: string
+            default: 인종
+          ethnicity_name:
+            type: string
+            default: 민족
+          death_date:
+            type: string
+            default: 사망 날짜

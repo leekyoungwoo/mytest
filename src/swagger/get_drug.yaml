@@ -1,0 +1,50 @@
+처방 정보 조회
+---
+tags:
+  - Drug
+parameters:
+  - in: query
+    name: page
+    type: integer
+    description: >
+      0페이지 부터 시작 10개씩 표기
+  - in: query
+    name: person_id
+    type: integer
+    description: >
+      환자 번호
+  - in: query
+    name: visit_occurrence_id
+    type: integer
+    description: >
+      방문 번호
+  - in: query
+    name: drug_name
+    type: string
+    description: >
+      처방명
+responses:
+  200:
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          visit_occurrence_id:
+            type: integer
+            default: 진단 번호
+          person_id:
+            type: integer
+            default: 환자 번호
+          drug_concept_id:
+            type: integer
+            default: 처방 concept 번호
+          concept_name:
+            type: string
+            default: 처방 명
+          drug_exposure_start_datetime:
+            type: string
+            default: 진단 시작 날짜
+          drug_exposure_end_datetime:
+            type: string
+            default: 진단 종료 날짜

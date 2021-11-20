@@ -1,0 +1,21 @@
+처방 정보 조회: |
+  SELECT person_id
+  	,drug_concept_id
+  	,C.concept_name
+  	,visit_occurrence_id
+  	,drug_exposure_start_datetime::TEXT
+  	,drug_exposure_end_datetime::TEXT
+  FROM de.drug_exposure E
+  LEFT JOIN de.concept C ON C.concept_id = E.drug_concept_id
+  WHERE TRUE
+  {% if person_id %}
+    AND person_id = {{ person_id }}
+  {% endif %}
+  {% if visit_occurrence_id %}
+    AND visit_occurrence_id = {{ visit_occurrence_id }}
+  {% endif %}
+  {% if drug_name %}
+    AND C.concept_name ILIKE {{ drug_name | ilike }}
+  {% endif %}
+  {% if offset %} OFFSET {{ offset }} {% endif %}
+  {% if limit %} LIMIT {{ limit }}  {% endif %}

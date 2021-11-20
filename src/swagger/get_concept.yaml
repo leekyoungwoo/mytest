@@ -1,0 +1,33 @@
+concept_id 정보 API
+---
+tags:
+  - Concept
+parameters:
+  - in: query
+    name: page
+    type: integer
+    description: >
+      0페이지 부터 시작 10개씩 표기
+  - in: query
+    name: table
+    type: string
+    description: >
+      테이블 종류별로 조회가능 ex) 'person', 'visit', 'condition', 'drug'
+  - in: query
+    name: concept_name
+    type: string
+    description: >
+      concept_name(카테고리) 검색
+responses:
+  200:
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          concept_id:
+            type: integer
+            default: concept 번호
+          concept_name:
+            type: string
+            default: 카테고리

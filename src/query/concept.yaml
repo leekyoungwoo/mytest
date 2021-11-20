@@ -1,0 +1,38 @@
+concept 조회: |
+  SELECT C.concept_id, concept_name
+  FROM (
+    SELECT 0 AS concept_id
+  {% if table == 'person' or not table %}
+    UNION
+    SELECT gender_concept_id
+    FROM de.person
+    UNION
+    SELECT race_concept_id
+    FROM de.person
+    UNION
+    SELECT ethnicity_concept_id
+    FROM de.person
+  {% endif %}
+  {% if table == 'visit' or not table %}
+    UNION
+    SELECT visit_concept_id
+    FROM de.visit_occurrence
+  {% endif %}
+  {% if table == 'condition' or not table %}
+    UNION
+    SELECT condition_concept_id
+    FROM de.condition_occurrence
+  {% endif %}
+  {% if table == 'drug' or not table %}
+    UNION
+    SELECT drug_concept_id
+    FROM de.drug_exposure
+  {% endif %}
+  ) A
+  LEFT JOIN de.concept C ON C.concept_id = A.concept_id
+  WHERE A.concept_id <> 0
+  {% if concept_name %}
+    AND concept_name ILIKE {{ concept_name | ilike }}
+  {% endif %}
+  {% if offset %} OFFSET {{ offset }} {% endif %}
+  {% if limit %} LIMIT {{ limit }}  {% endif %}

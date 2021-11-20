@@ -1,0 +1,50 @@
+방문 정보 조회
+---
+tags:
+  - Visit
+parameters:
+  - in: query
+    name: page
+    type: integer
+    description: >
+      0페이지 부터 시작 10개씩 표기
+  - in: query
+    name: person_id
+    type: integer
+    description: >
+      환자 번호
+  - in: query
+    name: visit_occurrence_id
+    type: integer
+    description: >
+      방문 번호
+  - in: query
+    name: visit_type
+    type: string
+    description: >
+      방문 유형 ex) Inpatient Visit (입원), Outpatient Visit (외래), Emergency Room Visit (응급)
+responses:
+  200:
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          visit_occurrence_id:
+            type: integer
+            default: 방문 번호
+          person_id:
+            type: integer
+            default: 환자 번호
+          visit_concept_id:
+            type: integer
+            default: 방문 유형 concept 번호
+          concept_name:
+            type: string
+            default: 방문 유형
+          visit_start_datetime:
+            type: string
+            default: 방문 시작 날짜
+          visit_end_datetime:
+            type: string
+            default: 방문 종료 날짜

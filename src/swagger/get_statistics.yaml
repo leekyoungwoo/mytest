@@ -1,0 +1,112 @@
+통계 조회
+---
+tags:
+  - Statistics
+responses:
+  200:
+    schema:
+      type: object
+      properties:
+        patient:
+          type: array
+          items:
+            type: object
+            properties:
+              all_count:
+                type: integer
+                default: 전체 환자 수
+              female_count:
+                type: integer
+                default: 성별 환자 수 (여자)
+              male_count:
+                type: integer
+                default: 성별 환자 수 (남자)
+              asian_count:
+                type: integer
+                default: 인종별 환자 수 (황인)
+              black_count:
+                type: integer
+                default: 인종별 환자 수 (흑인)
+              white_count:
+                type: integer
+                default: 인종별 환자 수 (백인)
+              hispanic_count:
+                type: integer
+                default: 민족별 환자 수 (hispanic)
+              nonhispanic_count:
+                type: integer
+                default: 민족별 환자 수 (No hispanic)
+              death_count:
+                type: integer
+                default: 사망 환자 수
+        visit:
+          type: array
+          items:
+            type: object
+            properties:
+              inpatient_count:
+                type: integer
+                default: 입원 방문 수
+              outpatient_count:
+                type: integer
+                default: 왜래 방문 수
+              emergency_count:
+                type: integer
+                default: 응급 방문 수
+              female_count:
+                type: integer
+                default: 성별 방문 수 (여자)
+              male_count:
+                type: integer
+                default: 성별 방문 수 (남자)
+              asian_count:
+                type: integer
+                default: 인종별 방문 수 (황인)
+              black_count:
+                type: integer
+                default: 인종별 방문 수 (흑인)
+              white_count:
+                type: integer
+                default: 인종별 방문 수 (백인)
+              hispanic_count:
+                type: integer
+                default: 민족별 방문 수 (hispanic)
+              nonhispanic_count:
+                type: integer
+                default: 민족별 방문 수 (No hispanic)
+              age_0_count:
+                type: integer
+                default: 연령별 방문 수 0대
+              age_10_count:
+                type: integer
+                default: 연령별 방문 수 10대
+              age_20_count:
+                type: integer
+                default: 연령별 방문 수 20대
+              age_30_count:
+                type: integer
+                default: 연령별 방문 수 30대
+              age_40_count:
+                type: integer
+                default: 연령별 방문 수 40대
+              age_50_count:
+                type: integer
+                default: 연령별 방문 수 50대
+              age_60_count:
+                type: integer
+                default: 연령별 방문 수 60대
+              age_70_count:
+                type: integer
+                default: 연령별 방문 수 70대
+              age_80_count:
+                type: integer
+                default: 연령별 방문 수 80대
+              age_90_count:
+                type: integer
+                default: 연령별 방문 수 90대
+              age_100_count:
+                type: integer
+                default: 연령별 방문 수 100대
+              age_110_count:
+                type: integer
+                default: 연령별 방문 수 110대

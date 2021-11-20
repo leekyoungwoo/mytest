@@ -1,0 +1,38 @@
+환자 통계: |
+  SELECT count(*) AS all_count
+    ,count(*) FILTER (WHERE P.gender_source_value = 'F') AS female_count
+    ,count(*) FILTER (WHERE P.gender_source_value = 'M') AS male_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'asian') AS asian_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'black') AS black_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'white') AS white_count
+    ,count(*) FILTER (WHERE P.ethnicity_source_value = 'hispanic') AS hispanic_count
+    ,count(*) FILTER (WHERE P.ethnicity_source_value = 'nonhispanic') AS nonhispanic_count
+    ,count(D.person_id) AS death_count
+  FROM de.person P
+  LEFT JOIN de.death D ON P.person_id = D.person_id;
+
+방문 통계: |
+  SELECT count(*) FILTER (WHERE V.visit_concept_id = 9201) AS inpatient_count
+    ,count(*) FILTER (WHERE V.visit_concept_id = 9202) AS outpatient_count
+    ,count(*) FILTER (WHERE V.visit_concept_id = 9203) AS emergency_count
+    ,count(*) FILTER (WHERE P.gender_source_value = 'F') AS female_count
+    ,count(*) FILTER (WHERE P.gender_source_value = 'M') AS male_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'asian') AS asian_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'black') AS black_count
+    ,count(*) FILTER (WHERE P.race_source_value = 'white') AS white_count
+    ,count(*) FILTER (WHERE P.ethnicity_source_value = 'hispanic') AS hispanic_count
+    ,count(*) FILTER (WHERE P.ethnicity_source_value = 'nonhispanic') AS nonhispanic_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 0) AS age_0_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 10) AS age_10_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 20) AS age_20_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 30) AS age_30_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 40) AS age_40_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 50) AS age_50_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 60) AS age_60_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 70) AS age_70_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 80) AS age_80_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 90) AS age_90_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 100) AS age_100_count
+    ,count(*) FILTER (WHERE floor(EXTRACT(YEAR from age(birth_datetime)) / 10) * 10 = 110) AS age_110_count
+  FROM de.visit_occurrence V
+  LEFT JOIN de.person P ON P.person_id = V.person_id

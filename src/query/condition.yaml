@@ -1,0 +1,21 @@
+진단 정보 조회: |
+  SELECT person_id
+  	,condition_concept_id
+    ,C.concept_name
+  	,condition_start_datetime::TEXT
+  	,condition_end_datetime::TEXT
+  	,visit_occurrence_id
+  FROM de.condition_occurrence O
+  LEFT JOIN de.concept C ON C.concept_id = O.condition_concept_id
+  WHERE condition_concept_id <> 0
+  {% if person_id %}
+    AND person_id = {{ person_id }}
+  {% endif %}
+  {% if visit_occurrence_id %}
+    AND visit_occurrence_id = {{ visit_occurrence_id }}
+  {% endif %}
+  {% if condition_name %}
+    AND C.concept_name ILIKE {{ condition_name | ilike }}
+  {% endif %}
+  {% if offset %} OFFSET {{ offset }} {% endif %}
+  {% if limit %} LIMIT {{ limit }}  {% endif %}

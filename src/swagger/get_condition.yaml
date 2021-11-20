@@ -1,0 +1,50 @@
+진단 정보 조회
+---
+tags:
+  - Condition
+parameters:
+  - in: query
+    name: page
+    type: integer
+    description: >
+      0페이지 부터 시작 10개씩 표기
+  - in: query
+    name: person_id
+    type: integer
+    description: >
+      환자 번호
+  - in: query
+    name: visit_occurrence_id
+    type: integer
+    description: >
+      방문 번호
+  - in: query
+    name: condition_name
+    type: string
+    description: >
+      진단명
+responses:
+  200:
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          visit_occurrence_id:
+            type: integer
+            default: 진단 번호
+          person_id:
+            type: integer
+            default: 환자 번호
+          condition_concept_id:
+            type: integer
+            default: 진단 concept 번호
+          concept_name:
+            type: string
+            default: 진단 명
+          condition_start_datetime:
+            type: string
+            default: 진단 시작 날짜
+          condition_end_datetime:
+            type: string
+            default: 진단 종료 날짜

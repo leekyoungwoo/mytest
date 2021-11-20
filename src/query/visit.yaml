@@ -1,0 +1,22 @@
+방문 정보 조회: |
+  SELECT visit_occurrence_id
+  	,person_id
+  	,visit_concept_id
+    ,C.concept_name
+  	,visit_start_datetime::TEXT
+  	,visit_end_datetime::TEXT
+  FROM de.visit_occurrence V
+  LEFT JOIN de.concept C ON C.concept_id = V.visit_concept_id
+  WHERE TRUE
+  {% if person_id %}
+    AND person_id = {{ person_id }}
+  {% endif %}
+  {% if visit_occurrence_id %}
+    AND visit_occurrence_id = {{ visit_occurrence_id }}
+  {% endif %}
+  {% if visit_type %}
+    AND C.concept_name ILIKE {{ visit_type | ilike }}
+  {% endif %}
+  {% if offset %} OFFSET {{ offset }} {% endif %}
+  {% if limit %} LIMIT {{ limit }}  {% endif %}
+

@@ -1,0 +1,31 @@
+환자 정보 조회: |
+  SELECT P.person_id
+  	,gender_concept_id
+  	,A.concept_name AS gender_name
+  	,birth_datetime::TEXT
+  	,race_concept_id
+  	,B.concept_name AS race_name
+  	,ethnicity_concept_id
+  	,C.concept_name AS ethnicity_name
+    ,D.death_date::TEXT
+  FROM de.person P
+  LEFT JOIN de.concept A ON A.concept_id = P.gender_concept_id
+  LEFT JOIN de.concept B ON B.concept_id = P.race_concept_id
+  LEFT JOIN de.concept C ON C.concept_id = P.ethnicity_concept_id
+  LEFT JOIN de.death D ON D.person_id = P.person_id
+  WHERE TRUE
+  {% if person_id %}
+    AND person_id = {{ person_id }}
+  {% endif %}
+  {% if gender_name %}
+    AND A.concept_name ILIKE {{ gender_name | ilike }}
+  {% endif %}
+  {% if race_name %}
+    AND B.concept_name ILIKE {{ race_name | ilike }}
+  {% endif %}
+  {% if ethnicity_name %}
+    AND C.concept_name ILIKE {{ ethnicity_name | ilike }}
+  {% endif %}
+  {% if offset %} OFFSET {{ offset }} {% endif %}
+  {% if limit %} LIMIT {{ limit }}  {% endif %}
+
